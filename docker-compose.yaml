@@ -1,0 +1,50 @@
+services:
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  nginx:
+    build: ./nginx/
+    container_name: nginx-container
+    ports:
+      - 80:80
+    links:
+      - php
+    volumes_from:
+      - app-data
+
+  php:
+    build: ./php/
+    container_name: php-container
+    expose:
+      - 9000
+    links:
+      - mysql
+    volumes_from:
+      - app-data
+
+  app-data:
+    image: php:7.0-fpm
+    container_name: app-data-container
+    volumes:
+      - ./www/html/:/var/www/html
+  
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-container
+    volumes_from:
+      - mysql-data
+    environment:
+      MYSQL_ROOT_PASSWORD: root@123
+      MYSQL_DATABASE: DemoCorpEcom
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin@123
+  
+  mysql-data:
+    image: mysql:5.7
+    container_name: mysql-data-container
+    volumes:
+      - /var/lib/mysql
+    command: "true"

@@ -6,7 +6,7 @@ $qry = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_array($qry)) {
     $name = $row['name'];
     $description = $row['description'];
-    echo $name;
+    echo '<div>'.$name.'</div>';
     echo $description;
 }
 ?>

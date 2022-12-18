@@ -11,11 +11,11 @@ if (!$selectdb) {
     }
 }
 if ($selectdb) {
-    $sqlcreatetable = "CREATE TABLE IF NOT EXISTS `register` (
+    $sqlcreatetable = "CREATE TABLE IF NOT EXISTS `product` (
                         `id` int(11) NOT NULL AUTO_INCREMENT,
-                        `username` varchar(100) NOT NULL UNIQUE,
-                        `email` varchar(100) NOT NULL,
-                        `password` varchar(100) NOT NULL,
+                        `name` varchar(100) NOT NULL UNIQUE,
+                        `description` varchar(100) NOT NULL,
+                        `price` FLOAT NOT NULL,
                         PRIMARY KEY (`id`))";
     mysqli_query($conn, $sqlcreatetable);
 }
